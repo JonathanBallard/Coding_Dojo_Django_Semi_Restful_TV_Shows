@@ -28,7 +28,7 @@
 <h1>Edit Show {{show.id}}</h1>
 
 
-<form action="/shows/{{show.id}}/update" method="POST">
+<form action="/shows/{{show.id}}/update/" method="POST">
     {% csrf_token %}
     <label for="title">Title</label>
     <input name="title" type="text" value="{{show.title}}">
@@ -48,7 +48,7 @@
 </form>
 
 
-<p><a href="/shows/{{show.id}}">Go to Show</a></p>
+<p><a href="/shows/{{show.id}}/">Go to Show</a></p>
 
 
 </body>

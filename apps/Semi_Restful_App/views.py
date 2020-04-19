@@ -23,13 +23,13 @@ def createShow(request):
 
 def thisShow(request, id):
     context = {
-        "this_show" : Show.objects.get(id=id),
+        "show" : Show.objects.get(id=id),
     }
     return render(request, 'Semi_Restful_App/this_show.html',context)
 
 def editThisShow(request,id):
     context = {
-        "this_show" : Show.objects.get(id=id),
+        "show" : Show.objects.get(id=id),
     }
     return render(request, 'Semi_Restful_App/edit_show.html', context)
 
