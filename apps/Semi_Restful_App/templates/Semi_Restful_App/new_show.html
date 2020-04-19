@@ -28,8 +28,8 @@
     <h1>Add a New Show</h1>
     <a class="ml-auto" href="shows/">Go Back</a>
     
-    <form action="createShow/" method="POST">
-        
+    <form action="/shows/create/" method="POST">
+        {% csrf_token %}
         <label for="title">Title</label>
         <input name="title" type="text">
     
@@ -38,7 +38,7 @@
 
         
         <label for="release_date">Release Date</label>
-        <input name="release_date" type="datetime">
+        <input name="release_date" type="date">
     
         <label for="description">Description</label>
         <input name="description" type="text">
