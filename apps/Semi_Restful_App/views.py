@@ -18,14 +18,19 @@ def newShow(request):
 
 def createShow(request):
 
-    errors = Show.objects.validator(request.POST)
+    errors = Show.objects.basic_validator(request.POST)
+    duplicate = Show.objects.duplicate_validator(request.POST)
+
+    if len(duplicate) > 0:
+        messages.error(request, duplicate)
+        return redirect('/shows/new/')
 
     if len(errors) > 0:
         for k, v in errors.items():
             messages.error(request,v)
         return redirect('/shows/new/')
     else:
-        Show.objects.create(title=request.POST['title'], network=request.POST['network'], release_date=request.POST['release_date'], desc = request.POST['description'])
+        Show.objects.create(title=request.POST['title'], network=request.POST['network'], release_date=request.POST['release_date'], desc = request.POST['desc'])
         messages.success(request,"Show created successfully!")
     return redirect('/shows/')
 
@@ -43,18 +48,18 @@ def editThisShow(request,id):
 
 def updateThisShow(request,id):
 
-    errors = Show.objects.validator(request.POST)
+    errors = Show.objects.basic_validator(request.POST)
 
     if len(errors) > 0:
         for k, v in errors.items():
             messages.error(request,v)
-        return redirect('/shows/' + id + '/edit/')
+        return redirect('/shows/' + str(id) + '/edit/')
     else:
         updateShow = Show.objects.get(id=id)
         updateShow.title=request.POST['title']
         updateShow.network=request.POST['network']
         updateShow.release_date=request.POST['release_date']
-        updateShow.desc = request.POST['description']
+        updateShow.desc = request.POST['desc']
         updateShow.save()
         messages.success(request,"Show updated successfully!")
     return redirect('/shows/')
