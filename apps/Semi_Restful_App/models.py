@@ -21,6 +21,4 @@ class ShowManager(models.Manager):
         if len(postData['desc']) < 10 and len(postData['desc']) > 0:
             errors['desc'] = "Description is optional, but must be at least 10 characters if used"
         
-        
-
         return errors

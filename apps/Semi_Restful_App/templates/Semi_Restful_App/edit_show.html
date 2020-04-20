@@ -47,6 +47,13 @@
 
 </form>
 
+    {% if messages %}
+    <ul class="messages">
+        {% for msg in messages %}
+        <li {% if msg.tags %} class="{{msg.tags}}"{% endif %}>{{msg}}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
 
 <p><a href="/shows/{{show.id}}/">Go to Show</a></p>
 
